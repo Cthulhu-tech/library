@@ -12,5 +12,4 @@ export interface IData {
     user: string;
     access: string;
     type: string;
-
 }
