@@ -1,11 +1,8 @@
 export const useFetch = (method: string) => {
 
-    let load = false;
-    let error = null;
+    const FetchData = (url: string, data: any = null) => {
 
-    const FetchData = (url: string) => {
-
-        return fetch(url, {
+        const headers:RequestInit = {
             method: method,
             mode: 'cors',
             redirect: 'follow',
@@ -14,27 +11,34 @@ export const useFetch = (method: string) => {
                 'Content-type': 'application/json',
                 'Accept': 'application/json'
             },
-        }).then((response) => {
+            body: data === null ? null : JSON.stringify(data)
+        }
+
+        return fetch(url, headers).then((response) => {
+
+            if(response.status === 400)
+                return response.json().then(json =>{ throw new Error(json.message) })
 
             return response.json();
 
         }).then((json) => {
 
-            load = true;
-
             return json;
 
         }).catch((err) => {
 
-            load = true;
+            if(typeof data.name !== 'undefined')
+                return {message: err.message, type: 'admin'}
+            if(typeof data.email !== 'undefined')
+                return {message: err.message, type: 'user'}
 
-            error = err;
+            return err;
 
         })
 
     }
 
 
-    return {load, error, FetchData}
+    return {FetchData}
 
 }
