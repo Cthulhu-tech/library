@@ -1,9 +1,11 @@
-import { RouteLocationNormalized, NavigationGuardNext } from 'vue-router';
-import jwt_decode from "jwt-decode";
+import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
+import { loadFonts } from './plugins/webfontloader'
+import vuetify from './plugins/vuetify'
+import jwt_decode from 'jwt-decode'
 import { createApp } from 'vue'
 import router from './router'
-import App from './App.vue'
 import store from './store'
+import App from './App.vue'
 
 const routers = ['Login', 'Registration', 'user', 'admin'];
 
@@ -36,6 +38,10 @@ router.beforeEach((to, from, next) => {
     else
         check(to, from, next)
 });
-  
 
-createApp(App).use(store).use(router).mount('#app')
+loadFonts()
+createApp(App)
+  .use(vuetify)
+  .use(router)
+  .use(store)
+  .mount('#app')

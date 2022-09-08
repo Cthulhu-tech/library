@@ -1,19 +1,16 @@
 <template>
-  <RouterComponent/>
+  <v-app>
+    <v-main>
+      <RouterComponent/>
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-
-  import RouterComponent from './components/router/RouterComponent.vue';
-
-  export default {
-    components: {
-      RouterComponent
-    }
+<script lang="ts">
+import RouterComponent from './components/router/RouterComponent.vue';
+export default {
+  components: {
+    RouterComponent
   }
-  
+}
 </script>
-
-<style lang="scss">
-  @import 'style/global.scss';
-</style>
