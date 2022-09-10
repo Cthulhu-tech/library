@@ -21,7 +21,7 @@
 <router-view/>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 export default defineComponent({
@@ -29,7 +29,6 @@ export default defineComponent({
         const currentRoute = computed(() => {
             return useRoute().name
         })
-
         return { currentRoute }
     }
 })
